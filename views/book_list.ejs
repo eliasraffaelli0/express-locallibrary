@@ -1,0 +1,12 @@
+<%- include('header'); -%> 
+    <h1><%= title %> </h1>
+
+    <ul>
+        <% Object.keys(book_list).forEach(book => { %> 
+            <li>
+                <p></p><a href="<%= book_list[book].url %> "><%= book_list[book].title %>  </a>(<%= book_list[book].author.name %> ) </p>
+            </li>
+        <% }); %> 
+    </ul>
+
+<%- include('footer'); -%> 
