@@ -7,7 +7,7 @@
                 <p><a href="<%= bookinstance_list[book].url %> "><%= bookinstance_list[book].book.title %>  </a>: <%= bookinstance_list[book].imprint %> - 
                 <%= bookinstance_list[book].status %> 
                 <% if(bookinstance_list[book].status !='Available'){ %>
-                    (Due:<%= bookinstance_list[book].due_back %> )
+                    (Due:<%= bookinstance_list[book].due_back_formatted %> )
                 <% } %>                 
                 </p>
             </li>
