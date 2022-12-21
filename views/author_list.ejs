@@ -4,7 +4,7 @@
     <ul>
         <% Object.keys(author_list).forEach(author => { %> 
             <li>
-                <p></p><a href="<%= author_list[author].url %> "><%= author_list[author].name %>  </a>(<%= author_list[author].date_of_birth_formatted %> - <%= author_list[author].date_of_death_formatted %>  ) </p>
+                <p><a href="<%= author_list[author].url %> "><%= author_list[author].name %>  </a>(<%= author_list[author].date_of_birth_formatted %> - <%= author_list[author].date_of_death_formatted %>  ) </p>
             </li>
         <% }); %> 
     </ul>
