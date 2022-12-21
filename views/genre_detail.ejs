@@ -1,0 +1,20 @@
+<%- include('header'); -%> 
+    <h1>Genre: <%= genre.name %> </h1>
+
+        
+    <div style='margin-left:20px;margin-top:20px'>
+        <h4>Books</h4>
+
+        <dl>
+            <% Object.keys(genre_books).forEach(book => { %> 
+                <dt>
+                    <a href="<%= genre_books[book].url %> "><%= genre_books[book].title %> ></a>
+                </dt>
+                <dd>
+                    <%= genre_books[book].summary %>
+                </dd>
+            <% }); %> 
+        </dl>
+    </div>
+
+<%- include('footer'); -%> 
