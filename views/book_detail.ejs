@@ -1,7 +1,7 @@
 <%- include('header'); -%> 
     <h1>Title: <%= book.title %> </h1>
 
-    <p>Author: <a href="book.author.url"><%= book.author.name %></a></p>
+    <p>Author: <a href="<%= book.author.url %>"><%= book.author.name %></a></p>
     <p>Summary: <%= book.summary %> </p>
     <p>ISBN: <%= book.isbn %> </p>
     <p>Genre: <%= book.isbn %> 
