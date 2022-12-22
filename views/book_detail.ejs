@@ -1,0 +1,31 @@
+<%- include('header'); -%> 
+    <h1>Title: <%= book.title %> </h1>
+
+    <p>Author: <a href="book.author.url"><%= book.author.name %></a></p>
+    <p>Summary: <%= book.summary %> </p>
+    <p>ISBN: <%= book.isbn %> </p>
+    <p>Genre: <%= book.isbn %> 
+        <% Object.keys(book.genre).forEach(genre => { %> 
+            <p><a href="<%= book.genre[genre].url %> "><%= book.genre[genre].name %>  </a>, </p>
+        <% }); %> 
+    </p>
+
+    <div style='margin-left:20px;margin-top:20px'>
+        <h4>Copies</h4>
+
+        <% if(Object.keys(book_instances).length !== 0) { %> 
+            <% Object.keys(book_instances).forEach(instance => { %>
+                <hr>
+                    <p><%=  book_instances[instance].status %></p>
+                    <p>Imprint: <%= book_instances[instance].imprint %> </p>
+                    <% if(book_instances[instance].status!='Available') { %> 
+                        <p>Due back: <%=  book_instances[instance].due_back %> </p>
+                    <% } %> 
+                    <p>Id: <a href="<%= book_instances[instance].url %> "><%= book_instances[instance]._id %></a></p>
+            <% }) %> 
+        <% } else { %> 
+            <p>There are no copies of this book in the library</p>
+        <% } %> 
+    </div>
+
+<%- include('footer'); -%> 
