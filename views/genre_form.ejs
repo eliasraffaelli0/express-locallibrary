@@ -1,0 +1,20 @@
+<%- include('header') -%> 
+
+    <h1><%= title %> </h1>
+
+    <form method='POST' action=''>
+        <div class="form-gropu">
+            <label for="name">Genre:</label>
+            <input id="name" type="text" class="form-control" name="name" placeholder="Fantasy, Poetry, etc" value="<%= typeof genre==="undefined" ? '' : genre.name %>">
+        </div>
+        <button class="btn-primary" type="submir">Submit</button>
+    </form>
+    <% if (typeof errors!=="undefined") { %> 
+        <ul>
+            <% Object.keys(errors).forEach(error => { %>
+                <li><%= errors[error].msg %> </li>
+            <%  }); %> 
+        </ul>
+    <% } %> 
+
+<%- include('footer') -%> 
