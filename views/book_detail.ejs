@@ -4,10 +4,12 @@
     <p>Author: <a href="<%= book.author.url %>"><%= book.author.name %></a></p>
     <p>Summary: <%= book.summary %> </p>
     <p>ISBN: <%= book.isbn %> </p>
-    <p>Genre: <%= book.isbn %> 
+    <p>Genres: 
+        <p>
         <% Object.keys(book.genre).forEach(genre => { %> 
-            <p><a href="<%= book.genre[genre].url %> "><%= book.genre[genre].name %>  </a>, </p>
+            <a href="<%= book.genre[genre].url %> "><%= book.genre[genre].name %> </a>,
         <% }); %> 
+        </p>
     </p>
 
     <div style='margin-left:20px;margin-top:20px'>
