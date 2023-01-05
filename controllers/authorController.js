@@ -3,6 +3,7 @@ const Author = require("../models/author");
 const Book = require("../models/book");
 const async = require("async");
 const {body, validationResult} = require("express-validator");
+const mongoose = require('mongoose');
 
 // Display list of all Authors.
 exports.author_list = (req, res, next) => {
@@ -104,13 +105,75 @@ exports.author_create_post = [
 ];
 
 // Display Author delete form on GET.
-exports.author_delete_get = (req, res) => {
-    res.send("NOT IMPLEMENTED: Author delete GET");
+exports.author_delete_get = (req, res, next) => {
+    async.parallel(
+        {
+            author(callback){
+                Author.findById(req.params.id).exec(callback);
+            },
+            authors_books(callback){
+                Book.find({author: req.params.id}).exec(callback);
+            },
+        },
+
+        (err, results) => {
+            if(err){
+                return next(err);
+            }
+            if(results.author==null){
+                //no author finded
+                res.redirect("/catalog/authors");
+            }
+            res.render("author_delete",{
+                title: "Delete author",
+                author: results.author,
+                author_books: results.authors_books
+            }); 
+        }
+    )
 };
 
 // Handle Author delete on POST.
-exports.author_delete_post = (req, res) => {
-    res.send("NOT IMPLEMENTED: Author delete POST");
+exports.author_delete_post = (req, res, next) => {
+    //the tutorial uses req.body.authorid but is not taking it as an Objectid and i don't know how to convert the string to an id so for now i'll use the id from the params
+        console.log(req.params.id);
+        console.log(mongoose.Types.ObjectId.isValid(req.params.id));
+        console.log(req.body.authorid);
+        console.log(mongoose.Types.ObjectId.isValid(req.body.authorid));
+    
+    async.parallel(
+        {
+            author(callback) {
+            Author.findById(req.params.id).exec(callback);
+            },
+            authors_books(callback) {
+            Book.find({ author: req.params.id }).exec(callback);
+            },
+        },
+        (err, results) => {
+            if (err) {
+                return next(err);
+            }
+            // Success
+            if (results.authors_books.length > 0) {
+                // Author has books. Render in same way as for GET route.
+                res.render("author_delete", {
+                    title: "Delete Author",
+                    author: results.author,
+                    author_books: results.authors_books,
+                });
+                return;
+            }
+            // Author has no books. Delete object and redirect to the list of authors.
+            Author.findByIdAndRemove(req.params.id, (err) => {
+            if (err) {
+                return next(err);
+            }
+            // Success - go to author list
+            res.redirect("/catalog/authors");
+            });
+        }
+    );
 };
 
 // Display Author update form on GET.
