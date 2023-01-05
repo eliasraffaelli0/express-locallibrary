@@ -14,7 +14,7 @@
                 <% authors.sort(function(a, b) {let textA = a.family_name.toUpperCase(); let textB = b.family_name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;}); %> 
                 <% Object.keys(authors).forEach(author => {  %>
                     <%  if(typeof book!=="undefined"){ %>
-                        <option value="<%= authors[author]._id %>" <%= authors[author]._id.toString()===book.author._id.toString() ? "selected" : '' %>><%= authors[author].name %></option>
+                        <option value="<%= authors[author]._id %>" <%= (authors[author]._id.toString()===book.author._id.toString()||authors[author]._id.toString()==book.author) ? "selected" : '' %>><%= authors[author].name %></option>
                     <% } else {%>
                         <option value="<%= authors[author]._id %>"><%= authors[author].name %></option>
                     <% }%>
