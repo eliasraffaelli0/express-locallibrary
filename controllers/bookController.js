@@ -198,7 +198,7 @@ exports.book_delete_get = (req, res, next) => {
             res.render("book_delete",{
                 title: "Delete book",
                 book: results.book,
-                books_bookinstances: results.books_bookinstances,
+                book_bookinstances: results.books_bookinstances,
             });
         },
     );
@@ -219,11 +219,11 @@ exports.book_delete_post = (req, res, next) => {
             if(err){
                 return next(err);
             }
-            if(results.books_bookinstances.length()>0){
+            if(results.books_bookinstances.length>0){
                 res.render("book_delete",{
                     title: "Delete book",
                     book: results.book,
-                    books_bookinstances: results.books_bookinstances,
+                    book_bookinstances: results.books_bookinstances,
                 });
                 return;
             }
