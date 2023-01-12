@@ -9,5 +9,6 @@
         <p>Due back: <%= bookinstance.due_back_formatted %> </p>
     <% } %> 
     <hr>
+    <p><a href="<%= bookinstance.url+'/update' %> ">Update bookinstance</a></p>
     <p><a href="<%= bookinstance.url+'/delete' %> ">Delete bookinstance</a></p>
 <%- include('footer'); -%> 
